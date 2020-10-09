@@ -53,14 +53,29 @@ function filterByQuery(query, animalsArray) {
     return filteredResults;
 }
 
-// A route for requesting data
+// A function for filtering the JSON data by a single animal ID
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
+
+// A route for requesting animal data by query
 app.get('/api/animals', (req,res) => {
     let results = animals;
     if (req.query) {
         results = filterByQuery(req.query, results)
     }
     res.json(results);
-})
+});
+// A route for requesting animal data by id
+app.get('/api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+    if (result) {
+      res.json(result);
+    } else {
+      res.send(404);
+    }
+});
 
 // Set up the port for requests
 app.listen(PORT, () => {
