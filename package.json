@@ -1,0 +1,24 @@
+{
+  "name": "zookeepr",
+  "version": "1.0.0",
+  "description": "This is an application creating a web server for a fictional zoo to provide information about animals through API calls.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpehl/zookeepr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kpehl/zookeepr/issues"
+  },
+  "homepage": "https://github.com/kpehl/zookeepr#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
