@@ -140,6 +140,14 @@ app.post('/api/animals', (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
+// A route for serving the animals page
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+// A route for serving the zookeepers page
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
 
 // Set up the port for requests (must be last in the file)
 app.listen(PORT, () => {
