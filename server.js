@@ -20,6 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 // Parse incoming JSON data (POST)
 app.use(express.json());
 
+// Use the public folder for all static http requests (i.e. don't require separate routes for CSS, images, etc.)
+app.use(express.static('public'));
+
 // A function for filtering JSON data by query (GET)
 function filterByQuery(query, animalsArray) {
     // set the filtered results array to equal the incoming animal array
@@ -133,7 +136,12 @@ app.post('/api/animals', (req, res) => {
     }
 });
 
-// Set up the port for requests
+// A route for serving the index page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+// Set up the port for requests (must be last in the file)
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}. Press CTRL C to exit.`)
 });
