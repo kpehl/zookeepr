@@ -1,8 +1,10 @@
 // Middleware so the server will know where to look for the routes
 
 const router = require('express').Router();
-const animalRoutes = require('../apiRoutes/animalRoutes');
+const animalRoutes = require('./animalRoutes');
+const zookeeperRoutes = require('./zookeeperRoutes');
 
 router.use(animalRoutes);
+router.use(zookeeperRoutes);
 
 module.exports = router;

@@ -1,5 +1,10 @@
+// Document query selectors
+// Zoo Keeper display area
 const $displayArea = document.querySelector('#display-area');
+// Zoo keeper search form
+const $zookeeperForm = document.querySelector('#zookeeper-form');
 
+// Function to create zoo keeper cards for display
 const printResults = resultArr => {
   console.log(resultArr);
 
@@ -20,11 +25,18 @@ const printResults = resultArr => {
   $displayArea.innerHTML = animalHTML.join('');
 };
 
-const getZookeepers = () => {
-  fetch('/api/zookeepers')
+// Function to display zoo keepers either as a whole or with a query
+const getZookeepers = (formData = {}) => {
+  let queryUrl = '/api/zookeepers?';
+
+  Object.entries(formData).forEach(([key, value]) => {
+    queryUrl += `${key}=${value}&`;
+  });
+
+  fetch(queryUrl)
     .then(response => {
       if (!response.ok) {
-        return alert('Error: ' + response.statusText);
+        return alert(`Error: ${response.statusText}`);
       }
       return response.json();
     })
@@ -34,4 +46,22 @@ const getZookeepers = () => {
     });
 };
 
+// Form Handler for the Zoo Keeper Page, allows searches by name or age
+const handleGetZookeepersSubmit = event => {
+  event.preventDefault();
+  const nameHTML = $zookeeperForm.querySelector('[name="name"]');
+  const name = nameHTML.value;
+
+  const ageHTML = $zookeeperForm.querySelector('[name="age"]');
+  const age = ageHTML.value;
+
+  const zookeeperObject = { name, age };
+
+  getZookeepers(zookeeperObject);
+};
+
+// Event listener for the zoo keeper search form
+$zookeeperForm.addEventListener('submit', handleGetZookeepersSubmit);
+
+// Load the zoo keepers upon page load
 getZookeepers();
