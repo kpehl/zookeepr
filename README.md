@@ -5,7 +5,7 @@ This is an application creating a web server for a fictional zoo to view informa
 
 ## Tools Used
 * HTML
-* CSS!
+* CSS
 * JavaScript ES5 and ES6
 * Node.js
 * Express.js
